@@ -14,6 +14,12 @@ ENTRY = (
     "complains, and books the same beach holiday next year."
 )
 
+# The gate is strict: /output/entry.txt must be UTF-8 text of 1 to 160
+# characters, not only white space. Fail loudly here rather than shipping
+# an entry the sealed scorer would refuse.
+assert 1 <= len(ENTRY) <= 160, f"entry is {len(ENTRY)} characters, gate needs 1-160"
+assert "\n" not in ENTRY, "entry must be a single line"
+
 
 def main() -> None:
     import os
